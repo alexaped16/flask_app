@@ -1,7 +1,7 @@
 
 from app import app
 from flask import render_template, redirect, url_for, flash
-from flask_login import login_user, logout_user, login_required 
+from flask_login import login_user, logout_user, login_required, current_user
 from app.forms import RegisterPhoneForm, SignUpForm, LoginForm
 from app.models import PhoneBook, User, Post
 
@@ -27,7 +27,7 @@ def phone():
         address = form.address.data
 
         # Check if there is a user with email or username
-        users_with_that_address = PhoneBook.query.filter((User.id==PhoneBook.id)|(PhoneBook.address==address)).all() 
+        users_with_that_address = PhoneBook(first_name=first_name, last_name=last_name, phone_number=phone_number, address=address, user_id=current_user_id)
         if users_with_that_address:
             flash(f"There is already a user with that address. Please try again", "danger")
             return render_template('signup.html', title=title, form=form)
