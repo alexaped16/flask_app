@@ -28,7 +28,7 @@ def signup():
 
         #flash message saying new user has been created
         flash(f"{new_user.username} has succesfully signed up.", "success")
-        return redirect(url_for('index'))
+        return redirect(url_for('site.index'))
 
     return render_template('signup.html', title=title, form=form)
 
@@ -49,7 +49,7 @@ def login():
             # flash message that user has successfully logged in
             flash(f'{user} has successfully logged in', 'success')
             # redirect to the home page
-            return redirect(url_for('index'))
+            return redirect(url_for('site.index'))
         else:
             flash('Username and/or password is incorrect', 'danger')
             
@@ -59,7 +59,7 @@ def login():
 def logout():
     logout_user()
     flash('You have successfully logged out', 'primary')
-    return redirect(url_for('index'))
+    return redirect(url_for('site.index'))
     
 
 
