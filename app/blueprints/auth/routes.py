@@ -1,54 +1,12 @@
-
-from app import app
 from flask import render_template, redirect, url_for, flash
-from flask_login import login_user, logout_user, login_required, current_user
-from app.forms import RegisterPhoneForm, SignUpForm, LoginForm
-from app.models import PhoneBook, User, Post
+from flask_login import login_user, logout_user, login_required
+from . import auth
+from .forms import SignUpForm, LoginForm
+from .models import User
 
 
 
-@app.route('/')
-def index():
-    title="Home"
-    posts = Post.query.all()
-    return render_template('index.html', title=title, posts=posts)
-
-
-@app.route('/register_phone', methods=["GET", "POST"])
-@login_required
-def phone(): 
-    title = 'Register phone'
-    form = RegisterPhoneForm()
-    #check if a post request AND if the form is valid
-    if form.validate_on_submit(): 
-        first_name = form.first_name.data
-        last_name = form.last_name.data
-        phone_number = form.phone_number.data
-        address = form.address.data
-
-        # Check if there is a user with email or username
-        users_with_that_address = PhoneBook(first_name=first_name, last_name=last_name, phone_number=phone_number, address=address, user_id=current_user.id)
-        if users_with_that_address:
-            flash(f"There is already a user with that address. Please try again", "danger")
-            return render_template('signup.html', title=title, form=form)
-
-        #create a new user instance with form data
-        new_phone = PhoneBook(first_name=first_name, last_name=last_name, phone_number=phone_number, address=address)
-        #flash message saying that they have registered their phone
-        flash(f"Nice {new_phone.first_name}! You have successfully registed your phone number", "success")
-        return redirect(url_for('index'))
-
-    return render_template('register_phone.html', title=title, form=form)
-
-@app.route('/my-addresses')
-@login_required
-def my_addresses():
-    title = 'My Addresses'
-    addresses = current_user.addresses.all()
-    return render_template('my_posts.html', title=title, addresses=addresses)
-
-
-@app.route('/signup', methods=["GET", "POST"])
+@auth.route('/signup', methods=["GET", "POST"])
 def signup():
     title = 'Sign Up'
     form = SignUpForm()
@@ -75,7 +33,7 @@ def signup():
     return render_template('signup.html', title=title, form=form)
 
 
-@app.route('/login', methods=['GET', 'POST'])
+@auth.route('/login', methods=['GET', 'POST'])
 def login():
     title = 'Log In'
     form = LoginForm()
@@ -97,9 +55,11 @@ def login():
             
     return render_template('login.html', title=title, form=form)
 
-@app.route('/logout')
+@auth.route('/logout')
 def logout():
     logout_user()
     flash('You have successfully logged out', 'primary')
     return redirect(url_for('index'))
     
+
+

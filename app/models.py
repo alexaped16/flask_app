@@ -14,6 +14,7 @@ class PhoneBook(db.Model):
     phone_number = db.Column(db.String(10), unique=True, nullable=False)
     address = db.Column(db.String(100), unique=True, nullable=False)
     date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -32,6 +33,7 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(256), nullable=False)
     date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     posts = db.relationship('Post', backref='author', lazy='dynamic')
+    new_phone = db.relationship('PhoneBook', backref='member', lazy='dynamic')
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)

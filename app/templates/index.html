@@ -4,9 +4,13 @@
 {% block content %}
 
     {% if current_user.is_authenticated %}
+
     <h1>Hello {{ current_user.username }}!</h1>
+
     {% else %}
+
     <h1>Hello please sign up to use our app</h1>
+    
     {% endif %}
 
     <h1>the little app that helps you connect with creatives in your area</h1>

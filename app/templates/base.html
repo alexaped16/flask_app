@@ -17,7 +17,8 @@
         <nav class="nav bg-dark d-flex justify-content-around">
             <a href="{{ url_for('index') }}" class="link-light">home</a>
             {% if current_user.is_authenticated %}
-            <a href="{{ url_for('phone') }}" class="link-light">register phone number</a>
+            <a href="{{ url_for('register_phone') }}" class="link-light">register phone number</a>
+            <a href="{{ url_for('my_addresses') }}" class="link-light">register phone number</a>
             <a href="{{ url_for('logout') }}" class="link-light">Log Out</a>
             {% else %}
             <a href="{{ url_for('signup') }}" class="link-light">sign up</a>
