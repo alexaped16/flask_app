@@ -3,7 +3,7 @@
 
 {% block content %}
     <h1>register here</h1>
-    <form method="post">
+    <form action="" method="post">
         {{ form.csrf_token }}
         <div class="form-group">
             {{ form.first_name.label }}
@@ -21,4 +21,6 @@
             {{ form.submit(class='btn btn-dark w-100') }}
         </div>
     </form>
-{% endblock content %} 
+    
+    
+{% endblock content %}
