@@ -12,6 +12,7 @@ def signup():
     form = SignUpForm()
     # check if a post request and that the form is valid
     if form.validate_on_submit():
+        print("hello")
         # Get data from the validated form
         email = form.email.data
         username = form.username.data
@@ -38,6 +39,7 @@ def login():
     title = 'Log In'
     form = LoginForm()
     if form.validate_on_submit():
+        print("hello")
         username = form.username.data
         password = form.password.data
         # Query for a user with that username

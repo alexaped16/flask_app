@@ -9,3 +9,7 @@ class RegisterPhoneForm(FlaskForm):
     phone_number = StringField('Phone Number', validators=[DataRequired()])
     address = StringField('Mailing Address', validators=[DataRequired()])
     submit = SubmitField('Register')
+
+class SearchForm(FlaskForm):
+    search = StringField('Search', validators=[DataRequired()])
+    submit = SubmitField('Search')

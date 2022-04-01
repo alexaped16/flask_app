@@ -3,23 +3,25 @@
 
 {% block content %}
 
-    <h1>My Addresses</h1>
-
-    {% for a in addresses %}
-
-    <div class="card">
-        <div class="card-body">
-            <h5 class="card-title">{{ a.first_name }}</h5>
-            <h5 class="card-title">{{ a.last_name }}</h5>
-            <p class="card-text">{{ a.phone_number }}</p>
-            <p class="card-text">{{ a.address }}</p>
-            <div>
-                
-            </div>
-            <a href="#" class="btn btn-success">Edit</a>
-            <a href="#" class="btn btn-danger">Delete</a>
-        </div>
-    </div>
+         <h1>My Addresses</h1>
+            <form method="post">
+                {{ form.csrf_token }}
+                <div class="form-group">
+                    {{ form.first_name.label }}
+                    {{ form.first_name(class='form-control', placeholder='Email') }}
+        
+                    {{ form.last_name.label }}
+                    {{ form.last_name(class='form-control', placeholder='Username') }}
+        
+                    {{ form.phone_number.label }}
+                    {{ form.phone_number(class='form-control', placeholder='Password') }}
+        
+                    {{ form.address.label }}
+                    {{ form.address(class='form-control', placeholder='Confirm Password') }}
+        
+                    {{ form.submit(class='btn btn-primary w-100') }}
+                </div>
+            </form>
 
     {% endfor %}
 

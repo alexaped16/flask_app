@@ -17,7 +17,15 @@ class PhoneBook(db.Model):
         db.session.commit()
 
     def __repr__(self): 
-        return f"<User|{self.first_name}>"
+        return f"<Phonebook {self.id} | {self.first_name}>"
+
+    def __str__(self):
+        return f"""
+        first_name: {self.first_name}
+        last_name: {self.last_name}
+        phone_number: {self.phone_number}
+        address: {self.address}
+        """
 
 class Post(db.Model): 
     id = db.Column(db.Integer, primary_key=True)
@@ -32,3 +40,5 @@ class Post(db.Model):
 
     def ___repr__(self): 
         return f"<Post|{self.title}>"
+
+
